@@ -3,6 +3,7 @@ package com.example.app_description_apiary.ui
 import android.app.Application
 import com.example.app_description_apiary.repository.repositoryModule
 import com.example.app_description_apiary.repository.serviceModule
+import com.example.app_description_apiary.repository.useCaseModule
 import com.example.app_description_apiary.repository.viewModelModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
@@ -12,7 +13,7 @@ class BaseApplication : Application() {
         super.onCreate()
         startKoin {
             androidContext(this@BaseApplication)
-            modules(viewModelModule, repositoryModule, serviceModule)
+            modules(viewModelModule, repositoryModule, serviceModule, useCaseModule)
         }
     }
 }

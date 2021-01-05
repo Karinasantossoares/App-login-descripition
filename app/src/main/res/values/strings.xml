@@ -11,4 +11,6 @@
     <string name="name_person">Joao Victor</string>
     <string name="text_job">Job</string>
     <string name="enviar_email">Enviar email</string>
+    <string name="message_error_cpf_invalid">É necessário digitar um CPF válido</string>
+    <string name="message_success_forgot_password">Senha atualizada com sucesso</string>
 </resources>

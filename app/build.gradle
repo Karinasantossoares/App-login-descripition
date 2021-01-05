@@ -10,6 +10,7 @@ android {
     defaultConfig {
         applicationId "com.example.app_description_apiary"
         minSdkVersion 19
+        multiDexEnabled true
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -68,5 +69,5 @@ dependencies {
     implementation "org.koin:koin-android-viewmodel:2.2.2"
 
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
-    implementation 'com.squareup.picasso:picasso:2.5.2'
+    implementation 'com.squareup.picasso:picasso:2.71828'
 }

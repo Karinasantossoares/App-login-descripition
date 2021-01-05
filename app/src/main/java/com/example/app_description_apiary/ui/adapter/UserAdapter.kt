@@ -4,12 +4,16 @@ package com.example.app_description_apiary.ui.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.app_description_apiary.R
-import com.example.app_description_apiary.data.User
+import com.example.app_description_apiary.data.DetailsUser
+import com.example.app_description_apiary.databinding.ItemDetailsBinding
+import com.squareup.picasso.Picasso
 
-class UserAdapter(private val user: List<User>) :
+
+class UserAdapter(private val user: List<DetailsUser>) :
     RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
 
 
@@ -27,14 +31,12 @@ class UserAdapter(private val user: List<User>) :
     override fun getItemCount() = user.count()
 
     class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val image = itemView.findViewById<TextView>(R.id.iv_person_detail)
-        val name = itemView.findViewById<TextView>(R.id.tv_name_detail)
-        val job = itemView.findViewById<TextView>(R.id.tv_job_detail)
+        private val binding = ItemDetailsBinding.bind(itemView)
 
-        fun bindView(user: User) {
-            image.text = user.urlImage
-            name.text = user.name
-            job.text = user.job
+        fun bindView(user: DetailsUser) {
+            Picasso.get().load(user.urlImage).into(binding.ivPersonDetail)
+            binding.tvNameDetail.text = user.name
+            binding.tvJobDetail.text = user.job
 
         }
     }
