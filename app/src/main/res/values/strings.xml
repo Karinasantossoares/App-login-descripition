@@ -18,4 +18,6 @@
     <string name="message_error_password">Por favor , digite sua senha.</string>
     <string name="message_error_servidor">Erro ao buscar resposta no servidor, por favor verifique sua internet.</string>
     <string name="message_error_email">Por favor, digite um email válido.</string>
+    <string name="error_not_connection">É necessário estar conectado a internet para realizar esta ação</string>
+    <string name="seja_bem_vindo">Seja bem vindo</string>
 </resources>

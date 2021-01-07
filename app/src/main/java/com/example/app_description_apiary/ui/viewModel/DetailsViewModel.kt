@@ -8,6 +8,7 @@ import com.example.app_description_apiary.data.DetailsUser
 import com.example.app_description_apiary.useCase.UserUseCase
 import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
+import java.net.UnknownHostException
 
 class DetailsViewModel(private val context: Context, private val userUseCase: UserUseCase) :
     ViewModel() {
@@ -20,13 +21,12 @@ class DetailsViewModel(private val context: Context, private val userUseCase: Us
     fun getDetailsUser(id: Int) {
         loadLiveData.value = true
         disposables.add(userUseCase.getDetailsUser(id).subscribe { res, error ->
-            if (error != null) {
+            if (error != null && error !is UnknownHostException) {
                 toasLiveData.value = error.message
             }
-            if (res.isEmpty()){
-                toasLiveData.value = context.getString(R.string.message_error_servidor)
-            }
-            else {
+            if (error != null && error is UnknownHostException) {
+                toasLiveData.value = context.getString(R.string.error_not_connection)
+            } else {
                 successLiveGetDetailsUser.value = res
             }
             loadLiveData.value = false

@@ -17,7 +17,6 @@ class UserRepository(
 
 ) {
 
-
     fun getDetailsUser(id: Int) = service.getDetailsUser(id).subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread()).map { listDetailsUserDto ->
             listDetailsUserDto.map {

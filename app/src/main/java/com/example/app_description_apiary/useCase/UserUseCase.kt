@@ -7,6 +7,7 @@ import com.example.app_description_apiary.R
 import com.example.app_description_apiary.data.RequestUser
 import com.example.app_description_apiary.data.ResetUser
 import com.example.app_description_apiary.data.ResponseUser
+import com.example.app_description_apiary.extensions.isEmailValid
 import com.example.app_description_apiary.repository.UserRepository
 import com.example.app_description_apiary.repository.networkDto.LoginRequestDTO
 import com.example.app_description_apiary.repository.networkDto.ResetLoginRequestDTO
@@ -32,13 +33,12 @@ class UserUseCase(
             repository.logIn(login)
         }
     }
-     
 
     fun resetPassword(loginReset: ResetUser): Single<Unit> {
-        if (!Patterns.EMAIL_ADDRESS.matcher(loginReset.email).matches()) {
-            return Single.error(Exception(context.getString(R.string.message_error_email)))
+        return if (!loginReset.email.isEmailValid()) {
+            Single.error(Exception(context.getString(R.string.message_error_email)))
         } else {
-            return repository.resetPassword(loginReset)
+            repository.resetPassword(loginReset)
         }
     }
 

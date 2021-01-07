@@ -12,13 +12,13 @@ import androidx.lifecycle.Observer
 import com.example.app_description_apiary.R
 import com.example.app_description_apiary.data.ResetUser
 import com.example.app_description_apiary.databinding.FragmentForgotPasswordBinding
-import com.example.app_description_apiary.ui.viewModel.ForgetViewModel
+import com.example.app_description_apiary.ui.viewModel.ForgotViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class ForgotPasswordFragment : Fragment() {
 
     private lateinit var binding: FragmentForgotPasswordBinding
-    private val viewModel: ForgetViewModel by viewModel()
+    private val viewModel: ForgotViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,7 +35,7 @@ class ForgotPasswordFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnSubmit.setOnClickListener {
-            val email = binding.etEmail.toString()
+            val email = binding.etEmail.text.toString()
             val resetUser = ResetUser(email)
             viewModel.resetPassword(resetUser)
         }

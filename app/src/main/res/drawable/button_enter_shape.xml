@@ -8,11 +8,7 @@
         />
 
     <solid
-        android:color="#baffff"
+        android:color="@color/blue"
         />
 
-    <stroke
-        android:width="2dp"
-        android:color="@color/white"
-        />
 </shape>

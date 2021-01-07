@@ -5,9 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.os.bundleOf
-import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -60,7 +58,7 @@ class LoginFragment : Fragment() {
                 .navigate(R.id.action_loginFragment_to_detailsFragment, bundle)
         })
 
-        viewModel.toasLiveData.observe(viewLifecycleOwner, Observer {
+        viewModel.messageErrorLiveData.observe(viewLifecycleOwner, Observer {
             binding.tvMessageError.text = it
         })
     }

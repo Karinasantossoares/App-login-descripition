@@ -8,7 +8,7 @@ import com.example.app_description_apiary.data.ResetUser
 import com.example.app_description_apiary.useCase.UserUseCase
 import io.reactivex.disposables.CompositeDisposable
 
-class ForgetViewModel(private var context: Context, private val useCase: UserUseCase) :
+class ForgotViewModel(private var context: Context, private val useCase: UserUseCase) :
     ViewModel() {
     val loadLiveData = MutableLiveData<Boolean>()
     val toasLiveData = MutableLiveData<String>()
@@ -21,10 +21,9 @@ class ForgetViewModel(private var context: Context, private val useCase: UserUse
             if (error != null) {
                 toasLiveData.value = error.localizedMessage
             } else {
-                toasLiveData.value = R.string.message_success_forgot_password.toString()
+                toasLiveData.value = context.getString(R.string.message_success_forgot_password)
             }
             loadLiveData.value = false
-
         })
     }
 
