@@ -3,6 +3,7 @@ package com.example.app_description_apiary.ui.viewModel
 import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.app_description_apiary.R
 import com.example.app_description_apiary.data.RequestUser
 import com.example.app_description_apiary.data.ResponseUser
 import com.example.app_description_apiary.useCase.UserUseCase
@@ -20,7 +21,7 @@ class LoginViewModel(private val context: Context, private val userUseCase: User
         loadLiveData.value = true
         disposables.add(userUseCase.logIn(login).subscribe { res, error ->
             if (error != null) {
-                toasLiveData.value = error.message
+                toasLiveData.value = error.localizedMessage
             } else {
                 successLiveDataLogin.value = res
             }

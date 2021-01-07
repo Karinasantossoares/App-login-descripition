@@ -5,15 +5,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.os.bundleOf
+import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.example.app_description_apiary.R
 import com.example.app_description_apiary.data.RequestUser
-import com.example.app_description_apiary.data.ResponseUser
 import com.example.app_description_apiary.databinding.FragmentLoginBinding
 import com.example.app_description_apiary.ui.viewModel.LoginViewModel
 import kotlinx.android.synthetic.main.fragment_login.*
@@ -43,6 +45,11 @@ class LoginFragment : Fragment() {
             viewModel.logIn(requestUser)
         }
 
+        binding.tvForgetPassword.setOnClickListener {
+            findNavController().navigate(R.id.action_loginFragment_to_forgotPasswordFragment)
+        }
+
+
         viewModel.loadLiveData.observe(this.viewLifecycleOwner, Observer {
             binding.pbLoad.isVisible = it
         })
@@ -51,6 +58,10 @@ class LoginFragment : Fragment() {
             val bundle = bundleOf(DetailsFragment.RESPONSE_LOGIN_KEY to it)
             view.findNavController()
                 .navigate(R.id.action_loginFragment_to_detailsFragment, bundle)
+        })
+
+        viewModel.toasLiveData.observe(viewLifecycleOwner, Observer {
+            binding.tvMessageError.text = it
         })
     }
 }

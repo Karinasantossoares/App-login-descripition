@@ -13,4 +13,9 @@
     <string name="enviar_email">Enviar email</string>
     <string name="message_error_cpf_invalid">É necessário digitar um CPF válido</string>
     <string name="message_success_forgot_password">Senha atualizada com sucesso</string>
+    <string name="message_error">Mensagem de erro</string>
+    <string name="error_fetching_information">Erro ao buscar informações , por favor cheque sua internet</string>
+    <string name="message_error_password">Por favor , digite sua senha.</string>
+    <string name="message_error_servidor">Erro ao buscar resposta no servidor, por favor verifique sua internet.</string>
+    <string name="message_error_email">Por favor, digite um email válido.</string>
 </resources>

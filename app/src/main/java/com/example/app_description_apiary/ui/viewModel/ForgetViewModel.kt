@@ -13,16 +13,18 @@ class ForgetViewModel(private var context: Context, private val useCase: UserUse
     val loadLiveData = MutableLiveData<Boolean>()
     val toasLiveData = MutableLiveData<String>()
     var disposables = CompositeDisposable()
+    var successLiveData = MutableLiveData<Unit>()
 
-    fun resetPassword(resetLogin: ResetUser) {
+    fun resetPassword(resetUser: ResetUser) {
         loadLiveData.value = true
-        disposables.add(useCase.resetPassword(resetLogin).subscribe { res, error ->
-            loadLiveData.value = true
+        disposables.add(useCase.resetPassword(resetUser).subscribe { res, error ->
             if (error != null) {
-                toasLiveData.value = error.message
+                toasLiveData.value = error.localizedMessage
             } else {
                 toasLiveData.value = R.string.message_success_forgot_password.toString()
             }
+            loadLiveData.value = false
+
         })
     }
 

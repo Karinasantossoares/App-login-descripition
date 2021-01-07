@@ -23,19 +23,25 @@ class UserUseCase(
     fun getDetailsUser(id: Int) = repository.getDetailsUser(id)
 
     fun logIn(login: RequestUser): Single<ResponseUser> {
-        if (login.cpf.length < 11) {
+        if (login.cpf.length != 11) {
             return Single.error(Exception(context.getString(R.string.message_error_cpf_invalid)))
         }
-
-        return repository.logIn(login)
+        return if (login.password.isEmpty()) {
+            Single.error(Exception(context.getString(R.string.message_error_password)))
+        } else {
+            repository.logIn(login)
+        }
     }
+     
 
     fun resetPassword(loginReset: ResetUser): Single<Unit> {
-        if(!Patterns.EMAIL_ADDRESS.matcher(loginReset.email).matches()){
-            return Single.error(Exception())
+        if (!Patterns.EMAIL_ADDRESS.matcher(loginReset.email).matches()) {
+            return Single.error(Exception(context.getString(R.string.message_error_email)))
+        } else {
+            return repository.resetPassword(loginReset)
         }
-        return repository.resetPassword(loginReset)
     }
 
 }
+
 

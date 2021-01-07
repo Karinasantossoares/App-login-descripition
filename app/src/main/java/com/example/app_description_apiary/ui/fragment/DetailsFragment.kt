@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 
@@ -43,6 +44,10 @@ class DetailsFragment : Fragment() {
 
         viewModel.loadLiveData.observe(viewLifecycleOwner, Observer {
 
+        })
+
+        viewModel.toasLiveData.observe(viewLifecycleOwner, Observer {
+            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
         })
 
         viewModel.successLiveGetDetailsUser.observe(viewLifecycleOwner, Observer {
