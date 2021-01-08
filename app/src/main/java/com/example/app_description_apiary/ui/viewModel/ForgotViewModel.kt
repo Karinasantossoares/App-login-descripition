@@ -13,7 +13,9 @@ class ForgotViewModel(private var context: Context, private val useCase: UserUse
     val loadLiveData = MutableLiveData<Boolean>()
     val toasLiveData = MutableLiveData<String>()
     var disposables = CompositeDisposable()
-    var successLiveData = MutableLiveData<Unit>()
+    var successLiveData = MutableLiveData<String>()
+    var returToBackLiveData = MutableLiveData<Unit>()
+
 
     fun resetPassword(resetUser: ResetUser) {
         loadLiveData.value = true
@@ -21,10 +23,14 @@ class ForgotViewModel(private var context: Context, private val useCase: UserUse
             if (error != null) {
                 toasLiveData.value = error.localizedMessage
             } else {
-                toasLiveData.value = context.getString(R.string.message_success_forgot_password)
+                successLiveData.value = context.getString(R.string.message_success_forgot_password)
             }
             loadLiveData.value = false
         })
+    }
+
+    fun clickOkDialog() {
+        returToBackLiveData.value = null
     }
 
 }

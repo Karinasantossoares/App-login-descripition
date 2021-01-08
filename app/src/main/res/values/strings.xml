@@ -20,4 +20,9 @@
     <string name="message_error_email">Por favor, digite um email válido.</string>
     <string name="error_not_connection">É necessário estar conectado a internet para realizar esta ação</string>
     <string name="seja_bem_vindo">Seja bem vindo</string>
+    <string name="title_alert_message">Aviso!</string>
+    <string name="message_back_login">Deseja voltar a tela de login?</string>
+    <string name="back_positive_message">Sim</string>
+    <string name="text_cancel_action">Não</string>
+    <string name="message_ok">Ok</string>
 </resources>

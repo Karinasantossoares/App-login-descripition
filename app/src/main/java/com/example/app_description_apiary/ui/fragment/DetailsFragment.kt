@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 
@@ -39,11 +40,13 @@ class DetailsFragment : Fragment() {
             viewModel.getDetailsUser(responseUser.id)
             binding.tvNamePersonTitile.text = responseUser.name
             Picasso.get().load(responseUser.urlImage).into(binding.ivPerson)
+            binding.swipeContainer.setOnRefreshListener {
+                viewModel.getDetailsUser(responseUser.id)
+            }
         }
 
-
         viewModel.loadLiveData.observe(viewLifecycleOwner, Observer {
-
+            binding.swipeContainer.isRefreshing = it
         })
 
         viewModel.toasLiveData.observe(viewLifecycleOwner, Observer {
