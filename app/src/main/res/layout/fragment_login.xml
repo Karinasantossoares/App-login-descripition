@@ -88,31 +88,18 @@
 
         </androidx.cardview.widget.CardView>
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_enter"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_marginTop="4dp"
-            android:background="@drawable/button_enter_shape"
-            android:text="@string/text_button_enter"
-            android:textColor="@color/white"
-            app:layout_constraintHorizontal_bias="0.473"
-            app:layout_constraintLeft_toLeftOf="@id/myCradView"
-            app:layout_constraintRight_toRightOf="@id/myCradView"
-            app:layout_constraintTop_toBottomOf="@id/myCradView" />
 
         <TextView
             android:id="@+id/tv_forget_password"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
+            android:layout_margin="20dp"
             android:gravity="center"
             android:text="@string/text_forgot_password"
             android:textSize="15sp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btn_enter" />
+            app:layout_constraintLeft_toLeftOf="@id/myCradView"
+            app:layout_constraintRight_toRightOf="@id/myCradView"
+            app:layout_constraintTop_toBottomOf="@id/myCradView"  />
 
         <ProgressBar
             android:id="@+id/pb_load"
@@ -128,12 +115,38 @@
         <TextView
             android:id="@+id/tv_message_error"
             android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textColor="#F44336"
             android:textSize="17sp"
             app:layout_constraintTop_toBottomOf="@id/pb_load"
             tools:hint="@string/message_error" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_enter"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/button_enter_shape"
+            android:text="@string/text_button_enter"
+            android:textColor="@color/white"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="@id/myCradView"
+            app:layout_constraintRight_toRightOf="@id/myCradView"
+            app:layout_constraintTop_toBottomOf="@id/tv_message_error" />
+
+        <ImageView
+            android:id="@+id/iv_biometric"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:visibility="invisible"
+            android:background="@drawable/ic_biometric"
+            app:layout_constraintTop_toBottomOf="@id/btn_enter"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_margin="20dp"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

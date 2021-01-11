@@ -1,10 +1,14 @@
 package com.example.app_description_apiary.ui.fragment.fragment
 
 
+import android.content.Context
+import android.hardware.biometrics.BiometricManager
+import android.hardware.biometrics.BiometricPrompt
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
@@ -22,6 +26,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 class LoginFragment : Fragment() {
     private lateinit var binding: FragmentLoginBinding
     private val viewModel: LoginViewModel by viewModel()
+
 
 
     override fun onCreateView(

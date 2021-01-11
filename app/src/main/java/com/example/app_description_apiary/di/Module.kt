@@ -1,6 +1,9 @@
-package com.example.app_description_apiary.repository
+package com.example.app_description_apiary.di
 
 
+import android.content.Context
+import com.example.app_description_apiary.persistence.preferences.AppPreferences
+import com.example.app_description_apiary.repository.UserRepository
 import com.example.app_description_apiary.service.UserService
 import com.example.app_description_apiary.ui.viewModel.LoginViewModel
 import com.example.app_description_apiary.ui.fragment.initRetrofit
@@ -13,7 +16,7 @@ import org.koin.dsl.module
 import retrofit2.Retrofit
 
 val viewModelModule = module {
-    viewModel { (LoginViewModel(androidContext(), get())) }
+    viewModel { (LoginViewModel(androidContext(), get(),get())) }
     viewModel { DetailsViewModel(androidContext(), get()) }
     viewModel { ForgotViewModel(androidContext(), get()) }
 
@@ -30,5 +33,12 @@ val serviceModule = module {
 }
 
 val useCaseModule = module {
-    single { UserUseCase(get(),get()) }
+    single { UserUseCase(get(), get()) }
+}
+
+val localPersistenceModule = module {
+    single {
+        androidContext().getSharedPreferences(AppPreferences.NAME, Context.MODE_PRIVATE)
+    }
+    single { AppPreferences(get()) }
 }
