@@ -25,4 +25,12 @@
     <string name="back_positive_message">Sim</string>
     <string name="text_cancel_action">Não</string>
     <string name="message_ok">Ok</string>
+    <string name="message_error_autentication">Erro na autenticação.</string>
+    <string name="message_success_autentication_device">Autenticação disponível.</string>
+    <string name="message_error_device_autentication">Autenticação indisponível.</string>
+    <string name="message_error_resgister_device">Nenhuma autenticação resgistrada.</string>
+    <string name="message_error_hardware_device">Seu dispositivo não suporta essa ação.</string>
+    <string name="message_title_biometric">Biometria</string>
+    <string name="message_description_biometric_dialog">Use suas credenciais para entrar no aplicativo</string>
+    <string name="message_enter_login_password_not_save">Digitar login e senha.</string>
 </resources>

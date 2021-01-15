@@ -1,11 +1,14 @@
 package com.example.app_description_apiary.ui.fragment.fragment
 
+import android.content.SharedPreferences
+import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -14,16 +17,20 @@ import com.example.app_description_apiary.R
 import com.example.app_description_apiary.data.DetailsUser
 import com.example.app_description_apiary.data.ResponseUser
 import com.example.app_description_apiary.databinding.FragmentDetailsBinding
+import com.example.app_description_apiary.persistence.preferences.AppPreferences
 import com.example.app_description_apiary.ui.adapter.UserAdapter
 import com.example.app_description_apiary.ui.viewModel.DetailsViewModel
 import com.squareup.picasso.Picasso
+import org.koin.android.ext.android.bind
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.util.zip.Inflater
 
 
-class DetailsFragment : Fragment() {
+class DetailsFragment(private val preferences: AppPreferences) : Fragment() {
     private lateinit var binding: FragmentDetailsBinding
     private val viewModel: DetailsViewModel by viewModel()
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,6 +43,8 @@ class DetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+
         arguments?.getParcelable<ResponseUser>(RESPONSE_LOGIN_KEY)?.let { responseUser ->
             viewModel.getDetailsUser(responseUser.id)
             binding.tvNamePersonTitile.text = responseUser.name
@@ -44,6 +53,25 @@ class DetailsFragment : Fragment() {
                 viewModel.getDetailsUser(responseUser.id)
             }
         }
+
+
+
+        binding.switchChangeColorBackground.setOnCheckedChangeListener { _, isChecked ->
+                binding.switchChangeColorBackground.isChecked = true
+                if(isChecked){
+                    binding.cardViewDetails.setBackgroundColor(Color.BLUE)
+                    preferences.saveIntColorKey(AppPreferences.COLOR,Color.BLUE)
+                    binding.switchChangeColorBackground
+                        .textOn = "Modo escuro ativado."
+                }else{
+                    binding.switchChangeColorBackground.isChecked = false
+                    binding.cardViewDetails.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.light_blue))
+                    preferences.saveIntColorKey(AppPreferences.COLOR,R.color.light_blue)
+                    binding.switchChangeColorBackground
+                        .textOn = "Modo claro ativado."
+                }
+        }
+
 
         viewModel.loadLiveData.observe(viewLifecycleOwner, Observer {
             binding.swipeContainer.isRefreshing = it
@@ -65,6 +93,5 @@ class DetailsFragment : Fragment() {
     companion object {
         const val RESPONSE_LOGIN_KEY = "RESPONSE_LOGIN_KEY"
     }
-
 
 }

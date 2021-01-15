@@ -11,11 +11,20 @@ class AppPreferences(private val preferences: SharedPreferences) {
         edit.apply()
     }
 
+    fun saveIntColorKey(key:String,value: Int){
+        val edit = preferences.edit()
+        edit.putInt(key, value)
+        edit.apply()
+    }
+
     fun getStringByKey(key: String) = preferences.getString(key, null)
+
+    fun getIntByKey(key:String) = preferences.getInt(key,0)
 
     companion object {
         const val NAME = "AppDescription"
-        const val LOGIN = "LOGIN"
+        const val CPF = "CPF"
         const val PASSWORD = "PASSWORD"
+        const val COLOR = "COLOR"
     }
 }
