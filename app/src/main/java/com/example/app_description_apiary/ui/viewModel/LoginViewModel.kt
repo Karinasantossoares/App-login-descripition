@@ -1,7 +1,6 @@
 package com.example.app_description_apiary.ui.viewModel
 
 import android.content.Context
-import android.content.SharedPreferences
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.app_description_apiary.R
