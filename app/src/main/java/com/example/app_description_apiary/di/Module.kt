@@ -17,7 +17,7 @@ import retrofit2.Retrofit
 
 val viewModelModule = module {
     viewModel { (LoginViewModel(androidContext(), get(),get())) }
-    viewModel { DetailsViewModel(androidContext(), get()) }
+    viewModel { DetailsViewModel(androidContext(), get(),get()) }
     viewModel { ForgotViewModel(androidContext(), get()) }
 
 }

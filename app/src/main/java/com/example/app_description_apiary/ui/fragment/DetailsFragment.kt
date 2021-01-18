@@ -1,29 +1,31 @@
 package com.example.app_description_apiary.ui.fragment.fragment
 
+import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.view.isVisible
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 
 import com.example.app_description_apiary.R
-import com.example.app_description_apiary.data.DetailsUser
 import com.example.app_description_apiary.data.ResponseUser
 import com.example.app_description_apiary.databinding.FragmentDetailsBinding
+import com.example.app_description_apiary.persistence.preferences.AppPreferences
 import com.example.app_description_apiary.ui.adapter.UserAdapter
 import com.example.app_description_apiary.ui.viewModel.DetailsViewModel
 import com.squareup.picasso.Picasso
 import org.koin.android.viewmodel.ext.android.viewModel
-import java.util.zip.Inflater
 
 
-class DetailsFragment : Fragment() {
+class DetailsFragment(private val preferences: AppPreferences) : Fragment() {
     private lateinit var binding: FragmentDetailsBinding
     private val viewModel: DetailsViewModel by viewModel()
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,6 +38,8 @@ class DetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+
         arguments?.getParcelable<ResponseUser>(RESPONSE_LOGIN_KEY)?.let { responseUser ->
             viewModel.getDetailsUser(responseUser.id)
             binding.tvNamePersonTitile.text = responseUser.name
@@ -44,6 +48,21 @@ class DetailsFragment : Fragment() {
                 viewModel.getDetailsUser(responseUser.id)
             }
         }
+
+        binding.switchChangeColorBackground.setOnCheckedChangeListener { _, isChecked ->
+            viewModel.changedColor(isChecked)
+        }
+
+
+
+        viewModel.colorDarkLiveData.observe(viewLifecycleOwner, Observer {
+            ContextCompat.getColor(requireContext(),R.color.blue)
+        })
+
+        viewModel.colorLightLiveData.observe(viewLifecycleOwner, Observer {
+            ContextCompat.getColor(requireContext(),R.color.light_blue)
+        })
+
 
         viewModel.loadLiveData.observe(viewLifecycleOwner, Observer {
             binding.swipeContainer.isRefreshing = it
@@ -65,6 +84,5 @@ class DetailsFragment : Fragment() {
     companion object {
         const val RESPONSE_LOGIN_KEY = "RESPONSE_LOGIN_KEY"
     }
-
 
 }

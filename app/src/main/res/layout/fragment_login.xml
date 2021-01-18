@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container_constraint"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -15,6 +16,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
 
         <TextView
             android:id="@+id/label_welcome"
@@ -93,7 +95,7 @@
             android:id="@+id/tv_forget_password"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
+            android:layout_margin="15dp"
             android:gravity="center"
             android:text="@string/text_forgot_password"
             android:textSize="15sp"
@@ -128,7 +130,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="15dp"
             android:background="@drawable/button_enter_shape"
             android:text="@string/text_button_enter"
             android:textColor="@color/white"
@@ -141,7 +143,7 @@
             android:id="@+id/iv_biometric"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:visibility="invisible"
+            android:visibility="gone"
             android:background="@drawable/ic_biometric"
             app:layout_constraintTop_toBottomOf="@id/btn_enter"
             app:layout_constraintRight_toRightOf="parent"
