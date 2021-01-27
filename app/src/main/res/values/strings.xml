@@ -62,4 +62,7 @@
     <string name="text_register_new_user">Ainda não tem uma conta? <font fgcolor ='#ED07C5'> \nRegistre-se aqui.</font> </string>
     <string name="message_sppiner_not_selected">Nenhuma opção selecionada</string>
     <string name="message_spinner_selected">Spinner selecionado</string>
+    <string name="text_switch_perfil_on">On</string>
+    <string name="text_perfil_off">Off</string>
+    <string name="text_perfil_activity">Toque na chave para ativar seu perfil</string>
 </resources>

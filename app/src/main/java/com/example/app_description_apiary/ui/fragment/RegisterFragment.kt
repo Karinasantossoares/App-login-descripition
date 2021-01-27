@@ -6,10 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -70,7 +67,7 @@ class RegisterFragment : Fragment() {
 
         viewModel.successLiveGetStates.observe(viewLifecycleOwner, Observer { listUfState ->
             val spinnerArrayAdapter: ArrayAdapter<Sigla> =
-                ArrayAdapter<Sigla>(
+                ArrayAdapter(
                     requireContext(),
                     R.layout.support_simple_spinner_dropdown_item,
                     listUfState
@@ -83,7 +80,7 @@ class RegisterFragment : Fragment() {
                 .setMessage(it)
                 .setCancelable(false)
                 .setPositiveButton(R.string.message_ok) { _, _ ->
-                    viewModel.scrrenLogin()
+                    viewModel.screenLogin()
                 }.create().show()
         })
 

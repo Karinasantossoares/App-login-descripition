@@ -1,23 +1,23 @@
-package com.example.app_description_apiary.ui.fragment.fragment
+package com.example.app_description_apiary.ui.fragment
 
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.example.app_description_apiary.R
 import com.example.app_description_apiary.data.ResponseUser
 import com.example.app_description_apiary.databinding.FragmentDetailsBinding
-import com.example.app_description_apiary.persistence.preferences.AppPreferences
 import com.example.app_description_apiary.ui.adapter.UserAdapter
 import com.example.app_description_apiary.ui.viewModel.DetailsViewModel
 import com.squareup.picasso.Picasso
-import org.koin.android.ext.android.bind
 import org.koin.android.viewmodel.ext.android.viewModel
 
 
@@ -39,7 +39,6 @@ class DetailsFragment() : Fragment() {
 
         viewModel.checkColor()
 
-
         arguments?.getParcelable<ResponseUser>(RESPONSE_LOGIN_KEY)?.let { responseUser->
             viewModel.getDetailsUser(responseUser.id)
             binding.tvNamePersonTitile.text = responseUser.name
@@ -49,25 +48,24 @@ class DetailsFragment() : Fragment() {
             }
         }
 
-        viewModel.checkSwitchLiveData.observe(viewLifecycleOwner, Observer {
-            binding.switchChangeColorBackground.isChecked = it
-        })
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            findNavController().navigate(R.id.action_detailsFragment_to_loginFragment)
+        }
 
         binding.switchChangeColorBackground.setOnCheckedChangeListener { _, isChecked ->
             viewModel.changedColor(isChecked)
-
         }
 
-        viewModel.checkColorLiveData.observe(viewLifecycleOwner, Observer {
-            viewModel.changedColor(it)
 
+        viewModel.checkSwitchLiveData.observe(viewLifecycleOwner, Observer {
+            binding.switchChangeColorBackground.isChecked = it
         })
 
         viewModel.colorDarkLiveData.observe(viewLifecycleOwner, Observer {
             binding.cardViewDetails.setCardBackgroundColor(
                 ContextCompat.getColor(
                     requireContext(),
-                    R.color.startColorGradient
+                    R.color.perfilOn
                 )
             )
         })
@@ -76,7 +74,7 @@ class DetailsFragment() : Fragment() {
             binding.cardViewDetails.setCardBackgroundColor(
                 ContextCompat.getColor(
                     requireContext(),
-                    R.color.endColorGradient
+                    R.color.perfiloff
                 )
             )
         })

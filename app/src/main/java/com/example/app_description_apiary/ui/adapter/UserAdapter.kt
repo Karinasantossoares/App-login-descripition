@@ -34,7 +34,10 @@ class UserAdapter(private val user: List<DetailsUser>) :
         private val binding = ItemDetailsBinding.bind(itemView)
 
         fun bindView(user: DetailsUser) {
-            Picasso.get().load(user.urlImage).into(binding.ivPersonDetail)
+            Picasso.Builder(itemView.context)
+                .build()
+                .load(user.urlImage)
+                .into(binding.ivPersonDetail)
             binding.tvNameDetail.text = user.name
             binding.tvJobDetail.text = user.job
 

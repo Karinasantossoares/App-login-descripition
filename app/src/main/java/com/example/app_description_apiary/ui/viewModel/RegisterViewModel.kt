@@ -31,7 +31,7 @@ class RegisterViewModel(private val context: Context, private val userUseCase: U
         })
     }
 
-    fun scrrenLogin() {
+    fun screenLogin() {
         backScreenLiveData.value = null
     }
 

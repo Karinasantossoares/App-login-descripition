@@ -22,7 +22,6 @@ class DetailsViewModel(
     var disposables = CompositeDisposable()
     var colorLightLiveData = MutableLiveData<Unit>()
     var colorDarkLiveData = MutableLiveData<Unit>()
-    var checkColorLiveData = MutableLiveData<Boolean>()
     var checkSwitchLiveData = MutableLiveData<Boolean>()
 
 
@@ -54,6 +53,8 @@ class DetailsViewModel(
     }
 
     fun checkColor() {
-       checkColorLiveData.value = preferences.getBooleanByKey(AppPreferences.COLOR_CARD_FORGOT_FRAGMENT)
+       val check =  preferences.getBooleanByKey(AppPreferences.COLOR_CARD_FORGOT_FRAGMENT)
+        changedColor(check)
     }
+
 }

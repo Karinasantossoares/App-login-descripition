@@ -1,4 +1,4 @@
-package com.example.app_description_apiary.ui.fragment.fragment
+package com.example.app_description_apiary.ui.fragment
 
 
 import android.os.Bundle
@@ -11,14 +11,14 @@ import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.app_description_apiary.R
 import com.example.app_description_apiary.data.RequestUser
 import com.example.app_description_apiary.databinding.FragmentLoginBinding
+
 import com.example.app_description_apiary.ui.components.BiometricView
 import com.example.app_description_apiary.ui.viewModel.LoginViewModel
-import kotlinx.android.synthetic.main.fragment_login.*
+
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class LoginFragment : Fragment() {
@@ -45,8 +45,8 @@ class LoginFragment : Fragment() {
 
 
         binding.btnEnter.setOnClickListener {
-            val cpf = et_cpf.text.toString()
-            val password = et_password.text.toString()
+            val cpf = binding.etCpf.text.toString()
+            val password = binding.etPassword.text.toString()
             val requestUserLogin = RequestUser(cpf, password)
             viewModel.logIn(requestUserLogin)
 
@@ -63,7 +63,7 @@ class LoginFragment : Fragment() {
         viewModel.checkDeviceLiveData.observe(this.viewLifecycleOwner, Observer {
             binding.ivBiometric.isVisible = it
             binding.ivBiometric.setOnClickListener {
-                biometricView.showDialogBiometric({viewModel.loginWithViewModel()},{})
+                biometricView.showDialogBiometric({ viewModel.loginWithViewModel() }, {})
             }
         })
 
@@ -72,15 +72,13 @@ class LoginFragment : Fragment() {
             binding.pbLoad.isVisible = it
         })
 
-        viewModel.successLiveDataLogin.observe(this.viewLifecycleOwner, Observer
-        {
+        viewModel.successLiveDataLogin.observe(this.viewLifecycleOwner, Observer {
             val bundle = bundleOf(DetailsFragment.RESPONSE_LOGIN_KEY to it)
-            view.findNavController()
+            findNavController()
                 .navigate(R.id.action_loginFragment_to_detailsFragment, bundle)
         })
 
-        viewModel.messageErrorLiveData.observe(viewLifecycleOwner, Observer
-        {
+        viewModel.messageErrorLiveData.observe(viewLifecycleOwner, Observer        {
             binding.tvMessageError.text = it
         })
     }

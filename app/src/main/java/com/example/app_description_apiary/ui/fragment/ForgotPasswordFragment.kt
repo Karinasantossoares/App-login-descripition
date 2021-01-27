@@ -1,4 +1,4 @@
-package com.example.app_description_apiary.ui.fragment.fragment
+package com.example.app_description_apiary.ui.fragment
 
 
 import android.app.AlertDialog
