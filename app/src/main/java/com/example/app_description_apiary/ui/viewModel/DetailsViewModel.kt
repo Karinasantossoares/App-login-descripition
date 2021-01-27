@@ -7,7 +7,6 @@ import com.example.app_description_apiary.R
 import com.example.app_description_apiary.data.DetailsUser
 import com.example.app_description_apiary.persistence.preferences.AppPreferences
 import com.example.app_description_apiary.useCase.UserUseCase
-import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
 import java.net.UnknownHostException
 
@@ -23,7 +22,8 @@ class DetailsViewModel(
     var disposables = CompositeDisposable()
     var colorLightLiveData = MutableLiveData<Unit>()
     var colorDarkLiveData = MutableLiveData<Unit>()
-
+    var checkColorLiveData = MutableLiveData<Boolean>()
+    var checkSwitchLiveData = MutableLiveData<Boolean>()
 
 
     fun getDetailsUser(id: Int) {
@@ -45,12 +45,15 @@ class DetailsViewModel(
         preferences.saveBooleanColorKey(AppPreferences.COLOR_CARD_FORGOT_FRAGMENT, choice)
         if (choice) {
             colorDarkLiveData.value = null
+            checkSwitchLiveData.value = choice
         } else {
             colorLightLiveData.value = null
+            checkSwitchLiveData.value = choice
+
         }
     }
 
-    fun checkColor(){
-
+    fun checkColor() {
+       checkColorLiveData.value = preferences.getBooleanByKey(AppPreferences.COLOR_CARD_FORGOT_FRAGMENT)
     }
 }

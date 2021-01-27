@@ -3,16 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <ScrollView
+        android:id="@+id/scrow_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/container_constraint"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <View
             android:id="@+id/tb_toolbar_login"
             android:layout_width="0dp"
             android:layout_height="180dp"
-            android:background="#84ffff"
+            android:background="@drawable/shape_view_toolbar"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -21,7 +27,7 @@
         <TextView
             android:id="@+id/label_welcome"
             android:text="@string/seja_bem_vindo"
-            android:textColor="@color/dark_gray"
+            android:textColor="@color/white"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -109,6 +115,7 @@
             android:layout_height="50dp"
             android:layout_marginTop="10dp"
             android:visibility="gone"
+            android:indeterminateDrawable="@drawable/shape_progress_bar"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_forget_password"
@@ -117,7 +124,7 @@
         <TextView
             android:id="@+id/tv_message_error"
             android:layout_width="match_parent"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="7dp"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textColor="#F44336"
@@ -130,25 +137,42 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="7dp"
             android:background="@drawable/button_enter_shape"
             android:text="@string/text_button_enter"
             android:textColor="@color/white"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toLeftOf="@id/myCradView"
             app:layout_constraintRight_toRightOf="@id/myCradView"
-            app:layout_constraintTop_toBottomOf="@id/tv_message_error" />
+            app:layout_constraintTop_toBottomOf="@id/tv_message_error"/>
 
         <ImageView
             android:id="@+id/iv_biometric"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:visibility="gone"
+            tools:visibility="visible"
             android:background="@drawable/ic_biometric"
             app:layout_constraintTop_toBottomOf="@id/btn_enter"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            android:layout_margin="20dp"/>
+            android:layout_margin="5dp"
+            android:contentDescription="@string/text_description_image" />
+
+        <TextView
+            android:id="@+id/tv_new_register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@id/iv_biometric"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:text="@string/text_register_new_user"
+            android:gravity="center"
+            android:layout_marginTop="10dp"/>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
 </layout>

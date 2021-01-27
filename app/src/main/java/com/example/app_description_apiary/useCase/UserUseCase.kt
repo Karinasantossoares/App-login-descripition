@@ -1,19 +1,16 @@
 package com.example.app_description_apiary.useCase
 
 import android.content.Context
-import android.util.Patterns
-import android.widget.Toast
+import android.icu.text.UFormat
 import com.example.app_description_apiary.R
-import com.example.app_description_apiary.data.RequestUser
-import com.example.app_description_apiary.data.ResetUser
-import com.example.app_description_apiary.data.ResponseUser
+import com.example.app_description_apiary.data.*
 import com.example.app_description_apiary.extensions.isEmailValid
+import com.example.app_description_apiary.extensions.toDate
 import com.example.app_description_apiary.repository.UserRepository
-import com.example.app_description_apiary.repository.networkDto.LoginRequestDTO
-import com.example.app_description_apiary.repository.networkDto.ResetLoginRequestDTO
 import io.reactivex.Single
 import java.lang.Exception
-import kotlin.coroutines.coroutineContext
+
+import java.util.*
 
 
 class UserUseCase(
@@ -42,6 +39,38 @@ class UserUseCase(
         }
     }
 
+    fun getStates() = repository.getStates()
+
+
+    fun newRegister(newUser: RegisterUser): Single<Unit> {
+        if (newUser.name.length < 3) {
+            return Single.error(Exception(context.getString(R.string.message_register_name)))
+        }
+        if (newUser.lastName.length < 3) {
+            return Single.error(Exception(context.getString(R.string.message_register_last_name)))
+        }
+        if (newUser.name == newUser.lastName) {
+            return Single.error(Exception(context.getString(R.string.message_strings_equals)))
+        }
+
+        if (newUser.dateOfBirth.isEmpty()) {
+            return Single.error(Exception(context.getString(R.string.message_error_empty)))
+        }
+        val date = newUser.dateOfBirth.toDate()
+        if (date == null) {
+            return Single.error(Exception(context.getString(R.string.message_error_date_of_birth_invalid)))
+        } else if (date.time >= Date().time) {
+            return Single.error(Exception(context.getString(R.string.message_error_date_future)))
+        }
+        val calendar = Calendar.getInstance(Locale.getDefault())
+        calendar.add(Calendar.YEAR, -18)
+        if (date.time >= calendar.time.time) {
+            return Single.error(Exception(context.getString(R.string.message_error_minor)))
+        }
+
+        return repository.newRegister(newUser)
+    }
 }
+
 
 

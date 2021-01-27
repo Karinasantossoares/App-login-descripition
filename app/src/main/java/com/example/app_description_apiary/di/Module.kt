@@ -5,10 +5,8 @@ import android.content.Context
 import com.example.app_description_apiary.persistence.preferences.AppPreferences
 import com.example.app_description_apiary.repository.UserRepository
 import com.example.app_description_apiary.service.UserService
-import com.example.app_description_apiary.ui.viewModel.LoginViewModel
 import com.example.app_description_apiary.ui.fragment.initRetrofit
-import com.example.app_description_apiary.ui.viewModel.DetailsViewModel
-import com.example.app_description_apiary.ui.viewModel.ForgotViewModel
+import com.example.app_description_apiary.ui.viewModel.*
 import com.example.app_description_apiary.useCase.UserUseCase
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.viewmodel.dsl.viewModel
@@ -19,6 +17,7 @@ val viewModelModule = module {
     viewModel { (LoginViewModel(androidContext(), get(),get())) }
     viewModel { DetailsViewModel(androidContext(), get(),get()) }
     viewModel { ForgotViewModel(androidContext(), get()) }
+    viewModel { RegisterViewModel(androidContext(),get())}
 
 }
 

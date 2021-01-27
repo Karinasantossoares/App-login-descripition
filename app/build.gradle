@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.app_description_apiary"
-        minSdkVersion 19
+        minSdkVersion 24
         multiDexEnabled true
         targetSdkVersion 30
         versionCode 1

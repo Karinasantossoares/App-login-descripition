@@ -33,4 +33,33 @@
     <string name="message_title_biometric">Biometria</string>
     <string name="message_description_biometric_dialog">Use suas credenciais para entrar no aplicativo</string>
     <string name="message_enter_login_password_not_save">Digitar login e senha.</string>
+    <string name="message_title_screen_registration">Cadastro</string>
+    <string name="text_name_et">Insira seu nome de usuário:</string>
+    <string name="text_surname_et">Insira seu sobrenome:</string>
+    <string name="et_date_of_birth">Insira sua data de nascimento:</string>
+    <string name="text_state_et">Insira seu estado:</string>
+    <string name="text_user_perfil">Perfil</string>
+    <string name="name_of_user">Nome do usuário</string>
+    <string name="title_surname">Sobrenome</string>
+    <string name="tv_birth">Data de nascimento</string>
+    <string name="titlw_state">Estado onde reside</string>
+    <string name="text_btn_register">CADASTRAR</string>
+    <string name="message_register_ok">Usúario registrado com sucesso.</string>
+    <string name="text_btn_submit">Enviar</string>
+    <string name="message_register_name">Por favor, digite um nome válido.</string>
+    <string name="message_register_last_name">Por favor, digite um sobrenome válido.</string>
+    <string name="message_strings_equals">Nome e sobrenome iguais.Por favor , digite dados válidos.</string>
+    <string name="message_date_null">Por favor , digite sua data de nascimento.</string>
+    <string name="message_date_invalid">Sua data de nascimento não pode ser a data de hoje.</string>
+    <string name="message_date_birth_minor">Infelizmente você não possui os requisitos para usar o aplicativo.Usuário menor de 18 anos.</string>
+    <string name="message_state_empty">Digite um estado válido</string>
+    <string name="fields_empty">Preencha os campos para se cadastrar.</string>
+    <string name="message_error_empty">A data de nascimento não pode estar vazia.</string>
+    <string name="message_error_date_of_birth_invalid">A data de nascimento deve ser válida.</string>
+    <string name="message_error_date_future">Data inválida.</string>
+    <string name="message_error_minor">É necessário ter pelo menos 18 anos para completar o seu registro.</string>
+    <string name="text_description_image">Imagem de biometria para logar no aplicativo</string>
+    <string name="text_register_new_user">Ainda não tem uma conta? <font fgcolor ='#ED07C5'> \nRegistre-se aqui.</font> </string>
+    <string name="message_sppiner_not_selected">Nenhuma opção selecionada</string>
+    <string name="message_spinner_selected">Spinner selecionado</string>
 </resources>

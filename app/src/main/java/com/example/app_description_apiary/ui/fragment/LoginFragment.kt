@@ -14,15 +14,11 @@ import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.app_description_apiary.R
-import com.example.app_description_apiary.R.color
 import com.example.app_description_apiary.data.RequestUser
 import com.example.app_description_apiary.databinding.FragmentLoginBinding
-import com.example.app_description_apiary.persistence.preferences.AppPreferences
 import com.example.app_description_apiary.ui.components.BiometricView
 import com.example.app_description_apiary.ui.viewModel.LoginViewModel
 import kotlinx.android.synthetic.main.fragment_login.*
-import org.koin.android.ext.android.bind
-import org.koin.android.ext.android.get
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class LoginFragment : Fragment() {
@@ -45,10 +41,7 @@ class LoginFragment : Fragment() {
 
         val biometricView = BiometricView(this)
         viewModel.checkBiometricDevice(biometricManager)
-        binding.ivBiometric.setOnClickListener {
-            biometricView.showDialogView()
-        }
-        biometricView.authenticantionLogin({viewModel.loginWithViewModel()},{})
+
 
 
         binding.btnEnter.setOnClickListener {
@@ -63,8 +56,15 @@ class LoginFragment : Fragment() {
             findNavController().navigate(R.id.action_loginFragment_to_forgotPasswordFragment)
         }
 
+        binding.tvNewRegister.setOnClickListener {
+            findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
+        }
+
         viewModel.checkDeviceLiveData.observe(this.viewLifecycleOwner, Observer {
             binding.ivBiometric.isVisible = it
+            binding.ivBiometric.setOnClickListener {
+                biometricView.showDialogBiometric({viewModel.loginWithViewModel()},{})
+            }
         })
 
         viewModel.loadLiveData.observe(this.viewLifecycleOwner, Observer

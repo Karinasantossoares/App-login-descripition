@@ -1,6 +1,6 @@
 package com.example.app_description_apiary.ui.fragment.fragment
 
-import android.graphics.Color
+
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,7 +10,6 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
-
 import com.example.app_description_apiary.R
 import com.example.app_description_apiary.data.ResponseUser
 import com.example.app_description_apiary.databinding.FragmentDetailsBinding
@@ -18,19 +17,19 @@ import com.example.app_description_apiary.persistence.preferences.AppPreferences
 import com.example.app_description_apiary.ui.adapter.UserAdapter
 import com.example.app_description_apiary.ui.viewModel.DetailsViewModel
 import com.squareup.picasso.Picasso
+import org.koin.android.ext.android.bind
 import org.koin.android.viewmodel.ext.android.viewModel
 
 
-class DetailsFragment(private val preferences: AppPreferences) : Fragment() {
+class DetailsFragment() : Fragment() {
     private lateinit var binding: FragmentDetailsBinding
     private val viewModel: DetailsViewModel by viewModel()
-
 
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_details, container, false)
         return binding.root
     }
@@ -38,9 +37,10 @@ class DetailsFragment(private val preferences: AppPreferences) : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel.checkColor()
 
 
-        arguments?.getParcelable<ResponseUser>(RESPONSE_LOGIN_KEY)?.let { responseUser ->
+        arguments?.getParcelable<ResponseUser>(RESPONSE_LOGIN_KEY)?.let { responseUser->
             viewModel.getDetailsUser(responseUser.id)
             binding.tvNamePersonTitile.text = responseUser.name
             Picasso.get().load(responseUser.urlImage).into(binding.ivPerson)
@@ -49,18 +49,36 @@ class DetailsFragment(private val preferences: AppPreferences) : Fragment() {
             }
         }
 
+        viewModel.checkSwitchLiveData.observe(viewLifecycleOwner, Observer {
+            binding.switchChangeColorBackground.isChecked = it
+        })
+
         binding.switchChangeColorBackground.setOnCheckedChangeListener { _, isChecked ->
             viewModel.changedColor(isChecked)
+
         }
 
+        viewModel.checkColorLiveData.observe(viewLifecycleOwner, Observer {
+            viewModel.changedColor(it)
 
+        })
 
         viewModel.colorDarkLiveData.observe(viewLifecycleOwner, Observer {
-            ContextCompat.getColor(requireContext(),R.color.blue)
+            binding.cardViewDetails.setCardBackgroundColor(
+                ContextCompat.getColor(
+                    requireContext(),
+                    R.color.startColorGradient
+                )
+            )
         })
 
         viewModel.colorLightLiveData.observe(viewLifecycleOwner, Observer {
-            ContextCompat.getColor(requireContext(),R.color.light_blue)
+            binding.cardViewDetails.setCardBackgroundColor(
+                ContextCompat.getColor(
+                    requireContext(),
+                    R.color.endColorGradient
+                )
+            )
         })
 
 
