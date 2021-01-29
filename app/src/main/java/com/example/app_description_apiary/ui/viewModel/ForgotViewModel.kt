@@ -24,7 +24,7 @@ class ForgotViewModel(
 
     fun resetPassword(resetUser: ResetUser) {
         loadLiveData.value = true
-        disposables.add(useCase.resetPassword(resetUser).subscribe { res, error ->
+        disposables.add(useCase.resetPassword(resetUser).subscribe { _, error ->
             if (error != null) {
                 toasLiveData.value = error.localizedMessage
             } else {

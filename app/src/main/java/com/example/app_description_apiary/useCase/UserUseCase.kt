@@ -2,6 +2,7 @@ package com.example.app_description_apiary.useCase
 
 import android.content.Context
 import android.icu.text.UFormat
+import android.text.TextUtils
 import com.example.app_description_apiary.R
 import com.example.app_description_apiary.data.*
 import com.example.app_description_apiary.extensions.isEmailValid
@@ -71,6 +72,7 @@ class UserUseCase(
 
         return repository.newRegister(newUser)
     }
+    
 }
 
 
