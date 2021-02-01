@@ -2,6 +2,7 @@ package com.example.app_description_apiary.di
 
 
 import android.content.Context
+import com.example.app_description_apiary.data.ResponseUser
 import com.example.app_description_apiary.persistence.preferences.AppPreferences
 import com.example.app_description_apiary.repository.UserRepository
 import com.example.app_description_apiary.service.UserService
@@ -14,10 +15,10 @@ import org.koin.dsl.module
 import retrofit2.Retrofit
 
 val viewModelModule = module {
-    viewModel { (LoginViewModel(androidContext(), get(),get())) }
-    viewModel { DetailsViewModel(androidContext(), get(),get()) }
+    viewModel { (LoginViewModel(androidContext(), get(), get())) }
+    viewModel { (responseUser: ResponseUser) -> DetailsViewModel(androidContext(), get(), get(), responseUser) }
     viewModel { ForgotViewModel(androidContext(), get()) }
-    viewModel { RegisterViewModel(androidContext(),get())}
+    viewModel { RegisterViewModel(androidContext(), get()) }
 
 }
 

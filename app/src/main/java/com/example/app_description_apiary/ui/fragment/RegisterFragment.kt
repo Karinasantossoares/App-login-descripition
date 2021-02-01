@@ -16,6 +16,7 @@ import com.example.app_description_apiary.R
 import com.example.app_description_apiary.data.RegisterUser
 import com.example.app_description_apiary.data.Sigla
 import com.example.app_description_apiary.databinding.FragmentRegisterBinding
+import com.example.app_description_apiary.extensions.addMask
 import com.example.app_description_apiary.extensions.setOnClickLeft
 import com.example.app_description_apiary.extensions.toText
 import com.example.app_description_apiary.ui.components.DateDialog
@@ -44,8 +45,7 @@ class RegisterFragment : Fragment() {
 
         viewModel.getStates()
         val dateDialog = DateDialog(requireContext())
-
-
+        binding.etDateOfBirth.addMask("NN/NN/NNNN")
 
         binding.btnRegister.setOnClickListener {
             val name = et_name_person.text.toString()

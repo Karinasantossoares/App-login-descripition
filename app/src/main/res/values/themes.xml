@@ -15,7 +15,10 @@
     </style>
 
     <style name="ColorSwitchChecked">
-        <item name="color">#78EEFD</item>
+        <item name="colorPrimary">#8F8C8C</item>
+        <item name="colorSecondary">#6FED74</item>
     </style>
 </resources>
+
+
 

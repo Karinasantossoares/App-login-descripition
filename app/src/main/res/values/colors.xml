@@ -11,6 +11,6 @@
     <color name="dark_gray">#575757</color>
     <color name="startColorGradient">#ED07C5</color>
     <color name="endColorGradient">#A82BBC</color>
-    <color name="perfilOn">#4D68FB</color>
-    <color name="perfiloff">#fff</color>
+    <color name="perfilOn">#B3EDB5</color>
+    <color name="perfiloff">#AEA8A7</color>
 </resources>

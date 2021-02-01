@@ -65,4 +65,7 @@
     <string name="text_switch_perfil_on">On</string>
     <string name="text_perfil_off">Off</string>
     <string name="text_perfil_activity">Toque na chave para ativar seu perfil</string>
+    <string name="message_off_profile">Toque para desativar o perfil</string>
+    <string name="message_on_profile">Toque para ativar seu perfil.</string>
+    <string name="status_profile_text">Status perfil</string>
 </resources>
