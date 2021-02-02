@@ -1,17 +1,14 @@
 package com.example.app_description_apiary.ui.fragment
 
 
-import android.graphics.MaskFilter
+
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.biometric.BiometricManager
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
-import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -20,11 +17,9 @@ import com.example.app_description_apiary.R
 import com.example.app_description_apiary.data.RequestUser
 import com.example.app_description_apiary.databinding.FragmentLoginBinding
 import com.example.app_description_apiary.extensions.addMask
-
 import com.example.app_description_apiary.ui.components.BiometricView
 import com.example.app_description_apiary.ui.viewModel.LoginViewModel
-import com.github.rtoshiro.util.format.SimpleMaskFormatter
-import com.github.rtoshiro.util.format.text.MaskTextWatcher
+
 
 import org.koin.android.viewmodel.ext.android.viewModel
 

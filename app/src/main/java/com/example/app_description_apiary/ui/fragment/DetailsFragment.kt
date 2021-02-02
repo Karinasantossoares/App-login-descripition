@@ -45,6 +45,7 @@ class DetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
         viewModel.checkColor()
         binding.tvNamePersonTitile.text = responseUser?.name
         Picasso.get().load(responseUser?.urlImage).into(binding.ivPerson)
