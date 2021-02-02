@@ -6,10 +6,16 @@ import androidx.lifecycle.ViewModel
 import com.example.app_description_apiary.R
 import com.example.app_description_apiary.data.RegisterUser
 import com.example.app_description_apiary.data.Sigla
+import com.example.app_description_apiary.monitoring.AuthenticateAnalytics
 import com.example.app_description_apiary.useCase.UserUseCase
+import com.google.firebase.analytics.FirebaseAnalytics
 import io.reactivex.disposables.CompositeDisposable
 
-class RegisterViewModel(private val context: Context, private val userUseCase: UserUseCase) :
+class RegisterViewModel(
+    private val context: Context,
+    private val userUseCase: UserUseCase,
+    private val analytics: AuthenticateAnalytics
+) :
     ViewModel() {
 
     val successLiveData = MutableLiveData<String>()
@@ -24,8 +30,10 @@ class RegisterViewModel(private val context: Context, private val userUseCase: U
         disposable.add(userUseCase.newRegister(newUser).subscribe { res, error ->
             if (res != null) {
                 successLiveData.value = context.getString(R.string.message_register_ok)
+                analytics.trackSuccessRegisterFirebase(newUser.name)
             } else {
                 messageErrorLiveData.value = error.localizedMessage
+                analytics.trackErrorRegisterFirebase(newUser.name)
             }
             loadLiveData.value = false
         })
@@ -37,7 +45,7 @@ class RegisterViewModel(private val context: Context, private val userUseCase: U
 
     fun getStates() {
         disposable.add(userUseCase.getStates().subscribe { res, _ ->
-            if(res != null){
+            if (res != null) {
                 successLiveGetStates.value = res
             }
         })

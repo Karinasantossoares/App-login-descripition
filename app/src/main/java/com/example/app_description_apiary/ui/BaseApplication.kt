@@ -12,7 +12,7 @@ class BaseApplication : Application() {
         startKoin {
             androidContext(this@BaseApplication)
             modules(viewModelModule, repositoryModule, serviceModule, useCaseModule,
-                localPersistenceModule)
+                localPersistenceModule, firebaseAuthenticateModule)
         }
     }
 }

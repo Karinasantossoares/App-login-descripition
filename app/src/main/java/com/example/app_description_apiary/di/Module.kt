@@ -3,13 +3,16 @@ package com.example.app_description_apiary.di
 
 import android.content.Context
 import com.example.app_description_apiary.data.ResponseUser
-import com.example.app_description_apiary.firebase.FirebaseAuthenticate
+import com.example.app_description_apiary.monitoring.AuthenticateAnalytics
 import com.example.app_description_apiary.persistence.preferences.AppPreferences
 import com.example.app_description_apiary.repository.UserRepository
 import com.example.app_description_apiary.service.UserService
 import com.example.app_description_apiary.ui.fragment.initRetrofit
 import com.example.app_description_apiary.ui.viewModel.*
 import com.example.app_description_apiary.useCase.UserUseCase
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.ktx.Firebase
+import io.reactivex.Single
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -17,10 +20,18 @@ import retrofit2.Retrofit
 
 
 val viewModelModule = module {
-    viewModel { (LoginViewModel(androidContext(), get(), get(),get())) }
-    viewModel { (responseUser: ResponseUser) -> DetailsViewModel(androidContext(), get(), get(), responseUser) }
-    viewModel { ForgotViewModel(androidContext(), get()) }
-    viewModel { RegisterViewModel(androidContext(), get()) }
+    viewModel { (LoginViewModel(androidContext(), get(), get(), get())) }
+    viewModel { (responseUser: ResponseUser) ->
+        DetailsViewModel(
+            androidContext(),
+            get(),
+            get(),
+            responseUser,
+            get()
+        )
+    }
+    viewModel { ForgotViewModel(androidContext(), get(),get()) }
+    viewModel { RegisterViewModel(androidContext(), get(),get()) }
 
 }
 
@@ -35,7 +46,7 @@ val serviceModule = module {
 }
 
 val useCaseModule = module {
-    single { UserUseCase(get(), get()) }
+    single { UserUseCase(get(), get(),get()) }
 }
 
 val localPersistenceModule = module {
@@ -46,5 +57,6 @@ val localPersistenceModule = module {
 }
 
 val firebaseAuthenticateModule = module {
-    single {FirebaseAuthenticate() }
+    single { Firebase.analytics }
+    single { AuthenticateAnalytics(get()) }
 }

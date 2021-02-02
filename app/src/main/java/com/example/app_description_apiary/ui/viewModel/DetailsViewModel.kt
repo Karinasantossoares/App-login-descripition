@@ -6,8 +6,10 @@ import androidx.lifecycle.ViewModel
 import com.example.app_description_apiary.R
 import com.example.app_description_apiary.data.DetailsUser
 import com.example.app_description_apiary.data.ResponseUser
+import com.example.app_description_apiary.monitoring.CheckDetailsAnalytcs
 import com.example.app_description_apiary.persistence.preferences.AppPreferences
 import com.example.app_description_apiary.useCase.UserUseCase
+import com.google.firebase.analytics.FirebaseAnalytics
 import io.reactivex.disposables.CompositeDisposable
 import java.net.UnknownHostException
 
@@ -15,7 +17,8 @@ class DetailsViewModel(
     private val context: Context,
     private val userUseCase: UserUseCase,
     private val preferences: AppPreferences,
-    responseUser: ResponseUser
+    responseUser: ResponseUser,
+    private val analytics: CheckDetailsAnalytcs
 ) :
     ViewModel() {
     var successLiveGetDetailsUser = MutableLiveData<List<DetailsUser>>()
@@ -38,11 +41,14 @@ class DetailsViewModel(
         disposables.add(userUseCase.getDetailsUser(id).subscribe { res, error ->
             if (error != null && error !is UnknownHostException) {
                 toasLiveData.value = error.message
+                analytics.errorCheckDetailsFirebase()
             }
             if (error != null && error is UnknownHostException) {
                 toasLiveData.value = context.getString(R.string.error_not_connection)
+                analytics.errorCheckDetailsFirebase()
             } else {
                 successLiveGetDetailsUser.value = res
+                analytics.successCheckDetailsFirebase()
             }
             loadLiveData.value = false
         })
