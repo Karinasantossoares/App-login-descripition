@@ -1,7 +1,6 @@
 package com.example.app_description_apiary.ui.fragment
 
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +12,7 @@ import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.app_description_apiary.R
 import com.example.app_description_apiary.data.ResponseUser
@@ -64,6 +64,16 @@ class DetailsFragment : Fragment() {
             viewModel.changedColor(isChecked)
         }
 
+        viewModel.successLiveGetDetailsUser.observe(viewLifecycleOwner, Observer { listDetails ->
+            val adapter = UserAdapter(listDetails) {detailsUser->
+               val bundle = bundleOf(
+                   DetailsProfileFragment.DATA to detailsUser
+               )
+                findNavController()
+                    .navigate(R.id.action_detailsFragment_to_detailsProfileFragment, bundle)
+            }
+           binding.rvMyRecycler.adapter = adapter
+        })
 
         viewModel.checkSwitchLiveData.observe(viewLifecycleOwner, Observer {
             binding.switchChangeColorBackground.isChecked = it
@@ -106,13 +116,6 @@ class DetailsFragment : Fragment() {
             Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
         })
 
-        viewModel.successLiveGetDetailsUser.observe(viewLifecycleOwner, Observer {
-            val responseUser = arguments?.getParcelable<ResponseUser>(RESPONSE_LOGIN_KEY)
-            if (responseUser != null) {
-                val adapter = UserAdapter(it)
-                binding.rvMyRecycler.adapter = adapter
-            }
-        })
     }
 
     companion object {

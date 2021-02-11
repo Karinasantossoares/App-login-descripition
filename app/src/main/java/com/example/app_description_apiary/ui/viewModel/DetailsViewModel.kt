@@ -9,7 +9,6 @@ import com.example.app_description_apiary.data.ResponseUser
 import com.example.app_description_apiary.monitoring.CheckDetailsAnalytcs
 import com.example.app_description_apiary.persistence.preferences.AppPreferences
 import com.example.app_description_apiary.useCase.UserUseCase
-import com.google.firebase.analytics.FirebaseAnalytics
 import io.reactivex.disposables.CompositeDisposable
 import java.net.UnknownHostException
 

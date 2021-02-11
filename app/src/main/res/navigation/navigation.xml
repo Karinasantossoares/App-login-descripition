@@ -36,10 +36,18 @@
             app:destination="@id/loginFragment"
             app:popUpTo="@id/loginFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_detailsFragment_to_detailsProfileFragment"
+            app:destination="@id/detailsProfileFragment" />
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
         android:name="com.example.app_description_apiary.ui.fragment.RegisterFragment"
         android:label="RegisterFragment"
         tools:layout="@layout/fragment_register"/>
+    <fragment
+        android:id="@+id/detailsProfileFragment"
+        android:name="com.example.app_description_apiary.ui.fragment.DetailsProfileFragment"
+        android:label="DetailsProfileFragment"
+        tools:layout="@layout/fragment_details_profile"/>
 </navigation>

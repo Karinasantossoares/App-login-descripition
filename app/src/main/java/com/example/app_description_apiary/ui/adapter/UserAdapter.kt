@@ -1,6 +1,7 @@
 package com.example.app_description_apiary.ui.adapter
 
 
+import android.telecom.Call
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +14,7 @@ import com.example.app_description_apiary.databinding.ItemDetailsBinding
 import com.squareup.picasso.Picasso
 
 
-class UserAdapter(private val user: List<DetailsUser>) :
+class UserAdapter(private val user: List<DetailsUser>,private val onClick: (DetailsUser) -> Unit) :
     RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
 
 
@@ -30,7 +31,7 @@ class UserAdapter(private val user: List<DetailsUser>) :
 
     override fun getItemCount() = user.count()
 
-    class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val binding = ItemDetailsBinding.bind(itemView)
 
         fun bindView(user: DetailsUser) {
@@ -40,6 +41,9 @@ class UserAdapter(private val user: List<DetailsUser>) :
                 .into(binding.ivPersonDetail)
             binding.tvNameDetail.text = user.name
             binding.tvJobDetail.text = user.job
+            binding.floatingButton.setOnClickListener {
+                onClick.invoke(user)
+            }
 
         }
     }
